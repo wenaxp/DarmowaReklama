@@ -80,7 +80,9 @@
     <Compile Include="Repository\AreaRepository.cs" />
     <Compile Include="Repository\IBaseCrudRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model\EscortServicesModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
