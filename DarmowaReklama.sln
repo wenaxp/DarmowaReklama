@@ -23,11 +23,12 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "DarmowaReklama.Web", "Darmo
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "1868"
+		SlnRelativePath = "DarmowaReklama.Web\"
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscortServices.Rest", "EscortServices.Rest\EscortServices.Rest.csproj", "{3E69F56B-331A-4DBE-8006-97ABAD7FE9E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscortServices.Repository", "EscortServices.Repository\EscortServices.Repository.csproj", "{EC68282D-8A68-432C-9FBD-021E1BE2506D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscortServices.DataAccess", "EscortServices.DataAccess\EscortServices.DataAccess.csproj", "{3761432D-2812-44FB-A640-15BB8F3CF050}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +48,10 @@ Global
 		{3E69F56B-331A-4DBE-8006-97ABAD7FE9E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E69F56B-331A-4DBE-8006-97ABAD7FE9E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E69F56B-331A-4DBE-8006-97ABAD7FE9E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC68282D-8A68-432C-9FBD-021E1BE2506D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC68282D-8A68-432C-9FBD-021E1BE2506D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC68282D-8A68-432C-9FBD-021E1BE2506D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC68282D-8A68-432C-9FBD-021E1BE2506D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3761432D-2812-44FB-A640-15BB8F3CF050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3761432D-2812-44FB-A640-15BB8F3CF050}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3761432D-2812-44FB-A640-15BB8F3CF050}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3761432D-2812-44FB-A640-15BB8F3CF050}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

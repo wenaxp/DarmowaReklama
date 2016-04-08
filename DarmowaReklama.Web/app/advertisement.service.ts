@@ -5,16 +5,16 @@ export interface IAdvertisement{
     //INFORMACJE PODSTAWOWE
     id:number;
     password:string;
-    category:number;//*
+    //category:number;//*
     name:string;//*
     age:number;//*
     weight:number;//*
-    breastSize:number;//*
+    bustSize:number;//*
     languages:number[];
     //LOKALIZACJA
     city:number;//*
     voivodeship:number;//*
-    district:number;
+    //district:number;
     address:string;
     //DANE KONTAKTOWE
     email:string;//*
