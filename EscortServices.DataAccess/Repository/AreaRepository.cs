@@ -7,14 +7,11 @@ using System.Threading.Tasks;
 
 namespace EscortServices.DataAccess.Repository
 {
-    public class AreaRepository
+    public class AreaRepository : BaseRepository
     {
-        private readonly EscortServicesEntities _context;
-
-        public AreaRepository(EscortServicesEntities context)
-        {
-            _context = context;
-        }
+        public AreaRepository(EscortServicesEntities context) 
+            : base(context)
+        { }
 
         public IQueryable<GetDistrictByCityId_Result> GetDistrictByCityId(string cityId)
         {

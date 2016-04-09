@@ -10,9 +10,8 @@
 namespace EscortServices.DataAccess.Model
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Advertisement
+    public partial class AdvertisementPagging_Result
     {
         public int Id { get; set; }
         public string Password { get; set; }
