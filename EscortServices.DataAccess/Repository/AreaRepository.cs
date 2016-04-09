@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Queryable;
 
 namespace EscortServices.DataAccess.Repository
 {
@@ -23,8 +22,10 @@ namespace EscortServices.DataAccess.Repository
             return res.AsQueryable<GetDistrictByCityId_Result>();
         }
 
-        public IQueryable<SearchCityByName_Result> SearchCityByName(string cityId)
+        public IQueryable<SearchCityByName_Result> SearchCityByName(string name)
         {
+            var res = _context.SearchCityByName(name);
+            return res.AsQueryable<SearchCityByName_Result>();
         }
 
     }

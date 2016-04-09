@@ -53,5 +53,6 @@ namespace EscortServices.DataAccess.Model
         public string ContentEN { get; set; }
         public string ContentDE { get; set; }
         public string ContentRU { get; set; }
+        public string PublicId { get; set; }
     }
 }
