@@ -46,5 +46,207 @@ namespace EscortServices.DataAccess.Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCityByName_Result>("SearchCityByName", nameParameter);
         }
+    
+        public virtual ObjectResult<Advertisement> AdvertisementPagging(ObjectParameter totalPages, Nullable<int> pageNo, Nullable<int> pageSize, string sortColumn, string sortOrder, Nullable<int> cityId, Nullable<int> voivodeshipId, Nullable<int> ageFrom, Nullable<int> ageTo, Nullable<int> weightFrom, Nullable<int> weightTo, Nullable<int> bustSizeFrom, Nullable<int> bustSizeTo, Nullable<bool> english, Nullable<bool> german, Nullable<bool> russian, Nullable<int> price1hFrom, Nullable<int> price1hTo, Nullable<int> price30minFrom, Nullable<int> price30minTo, Nullable<int> price15minFrom, Nullable<int> price15minTo, Nullable<int> priceAllNightFrom, Nullable<int> priceAllNightTo, Nullable<int> outCallsId)
+        {
+            var pageNoParameter = pageNo.HasValue ?
+                new ObjectParameter("PageNo", pageNo) :
+                new ObjectParameter("PageNo", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            var sortColumnParameter = sortColumn != null ?
+                new ObjectParameter("SortColumn", sortColumn) :
+                new ObjectParameter("SortColumn", typeof(string));
+    
+            var sortOrderParameter = sortOrder != null ?
+                new ObjectParameter("SortOrder", sortOrder) :
+                new ObjectParameter("SortOrder", typeof(string));
+    
+            var cityIdParameter = cityId.HasValue ?
+                new ObjectParameter("CityId", cityId) :
+                new ObjectParameter("CityId", typeof(int));
+    
+            var voivodeshipIdParameter = voivodeshipId.HasValue ?
+                new ObjectParameter("VoivodeshipId", voivodeshipId) :
+                new ObjectParameter("VoivodeshipId", typeof(int));
+    
+            var ageFromParameter = ageFrom.HasValue ?
+                new ObjectParameter("AgeFrom", ageFrom) :
+                new ObjectParameter("AgeFrom", typeof(int));
+    
+            var ageToParameter = ageTo.HasValue ?
+                new ObjectParameter("AgeTo", ageTo) :
+                new ObjectParameter("AgeTo", typeof(int));
+    
+            var weightFromParameter = weightFrom.HasValue ?
+                new ObjectParameter("WeightFrom", weightFrom) :
+                new ObjectParameter("WeightFrom", typeof(int));
+    
+            var weightToParameter = weightTo.HasValue ?
+                new ObjectParameter("WeightTo", weightTo) :
+                new ObjectParameter("WeightTo", typeof(int));
+    
+            var bustSizeFromParameter = bustSizeFrom.HasValue ?
+                new ObjectParameter("BustSizeFrom", bustSizeFrom) :
+                new ObjectParameter("BustSizeFrom", typeof(int));
+    
+            var bustSizeToParameter = bustSizeTo.HasValue ?
+                new ObjectParameter("BustSizeTo", bustSizeTo) :
+                new ObjectParameter("BustSizeTo", typeof(int));
+    
+            var englishParameter = english.HasValue ?
+                new ObjectParameter("English", english) :
+                new ObjectParameter("English", typeof(bool));
+    
+            var germanParameter = german.HasValue ?
+                new ObjectParameter("German", german) :
+                new ObjectParameter("German", typeof(bool));
+    
+            var russianParameter = russian.HasValue ?
+                new ObjectParameter("Russian", russian) :
+                new ObjectParameter("Russian", typeof(bool));
+    
+            var price1hFromParameter = price1hFrom.HasValue ?
+                new ObjectParameter("Price1hFrom", price1hFrom) :
+                new ObjectParameter("Price1hFrom", typeof(int));
+    
+            var price1hToParameter = price1hTo.HasValue ?
+                new ObjectParameter("Price1hTo", price1hTo) :
+                new ObjectParameter("Price1hTo", typeof(int));
+    
+            var price30minFromParameter = price30minFrom.HasValue ?
+                new ObjectParameter("Price30minFrom", price30minFrom) :
+                new ObjectParameter("Price30minFrom", typeof(int));
+    
+            var price30minToParameter = price30minTo.HasValue ?
+                new ObjectParameter("Price30minTo", price30minTo) :
+                new ObjectParameter("Price30minTo", typeof(int));
+    
+            var price15minFromParameter = price15minFrom.HasValue ?
+                new ObjectParameter("Price15minFrom", price15minFrom) :
+                new ObjectParameter("Price15minFrom", typeof(int));
+    
+            var price15minToParameter = price15minTo.HasValue ?
+                new ObjectParameter("Price15minTo", price15minTo) :
+                new ObjectParameter("Price15minTo", typeof(int));
+    
+            var priceAllNightFromParameter = priceAllNightFrom.HasValue ?
+                new ObjectParameter("PriceAllNightFrom", priceAllNightFrom) :
+                new ObjectParameter("PriceAllNightFrom", typeof(int));
+    
+            var priceAllNightToParameter = priceAllNightTo.HasValue ?
+                new ObjectParameter("PriceAllNightTo", priceAllNightTo) :
+                new ObjectParameter("PriceAllNightTo", typeof(int));
+    
+            var outCallsIdParameter = outCallsId.HasValue ?
+                new ObjectParameter("OutCallsId", outCallsId) :
+                new ObjectParameter("OutCallsId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Advertisement>("AdvertisementPagging", totalPages, pageNoParameter, pageSizeParameter, sortColumnParameter, sortOrderParameter, cityIdParameter, voivodeshipIdParameter, ageFromParameter, ageToParameter, weightFromParameter, weightToParameter, bustSizeFromParameter, bustSizeToParameter, englishParameter, germanParameter, russianParameter, price1hFromParameter, price1hToParameter, price30minFromParameter, price30minToParameter, price15minFromParameter, price15minToParameter, priceAllNightFromParameter, priceAllNightToParameter, outCallsIdParameter);
+        }
+    
+        public virtual ObjectResult<Advertisement> AdvertisementPagging(ObjectParameter totalPages, Nullable<int> pageNo, Nullable<int> pageSize, string sortColumn, string sortOrder, Nullable<int> cityId, Nullable<int> voivodeshipId, Nullable<int> ageFrom, Nullable<int> ageTo, Nullable<int> weightFrom, Nullable<int> weightTo, Nullable<int> bustSizeFrom, Nullable<int> bustSizeTo, Nullable<bool> english, Nullable<bool> german, Nullable<bool> russian, Nullable<int> price1hFrom, Nullable<int> price1hTo, Nullable<int> price30minFrom, Nullable<int> price30minTo, Nullable<int> price15minFrom, Nullable<int> price15minTo, Nullable<int> priceAllNightFrom, Nullable<int> priceAllNightTo, Nullable<int> outCallsId, MergeOption mergeOption)
+        {
+            var pageNoParameter = pageNo.HasValue ?
+                new ObjectParameter("PageNo", pageNo) :
+                new ObjectParameter("PageNo", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            var sortColumnParameter = sortColumn != null ?
+                new ObjectParameter("SortColumn", sortColumn) :
+                new ObjectParameter("SortColumn", typeof(string));
+    
+            var sortOrderParameter = sortOrder != null ?
+                new ObjectParameter("SortOrder", sortOrder) :
+                new ObjectParameter("SortOrder", typeof(string));
+    
+            var cityIdParameter = cityId.HasValue ?
+                new ObjectParameter("CityId", cityId) :
+                new ObjectParameter("CityId", typeof(int));
+    
+            var voivodeshipIdParameter = voivodeshipId.HasValue ?
+                new ObjectParameter("VoivodeshipId", voivodeshipId) :
+                new ObjectParameter("VoivodeshipId", typeof(int));
+    
+            var ageFromParameter = ageFrom.HasValue ?
+                new ObjectParameter("AgeFrom", ageFrom) :
+                new ObjectParameter("AgeFrom", typeof(int));
+    
+            var ageToParameter = ageTo.HasValue ?
+                new ObjectParameter("AgeTo", ageTo) :
+                new ObjectParameter("AgeTo", typeof(int));
+    
+            var weightFromParameter = weightFrom.HasValue ?
+                new ObjectParameter("WeightFrom", weightFrom) :
+                new ObjectParameter("WeightFrom", typeof(int));
+    
+            var weightToParameter = weightTo.HasValue ?
+                new ObjectParameter("WeightTo", weightTo) :
+                new ObjectParameter("WeightTo", typeof(int));
+    
+            var bustSizeFromParameter = bustSizeFrom.HasValue ?
+                new ObjectParameter("BustSizeFrom", bustSizeFrom) :
+                new ObjectParameter("BustSizeFrom", typeof(int));
+    
+            var bustSizeToParameter = bustSizeTo.HasValue ?
+                new ObjectParameter("BustSizeTo", bustSizeTo) :
+                new ObjectParameter("BustSizeTo", typeof(int));
+    
+            var englishParameter = english.HasValue ?
+                new ObjectParameter("English", english) :
+                new ObjectParameter("English", typeof(bool));
+    
+            var germanParameter = german.HasValue ?
+                new ObjectParameter("German", german) :
+                new ObjectParameter("German", typeof(bool));
+    
+            var russianParameter = russian.HasValue ?
+                new ObjectParameter("Russian", russian) :
+                new ObjectParameter("Russian", typeof(bool));
+    
+            var price1hFromParameter = price1hFrom.HasValue ?
+                new ObjectParameter("Price1hFrom", price1hFrom) :
+                new ObjectParameter("Price1hFrom", typeof(int));
+    
+            var price1hToParameter = price1hTo.HasValue ?
+                new ObjectParameter("Price1hTo", price1hTo) :
+                new ObjectParameter("Price1hTo", typeof(int));
+    
+            var price30minFromParameter = price30minFrom.HasValue ?
+                new ObjectParameter("Price30minFrom", price30minFrom) :
+                new ObjectParameter("Price30minFrom", typeof(int));
+    
+            var price30minToParameter = price30minTo.HasValue ?
+                new ObjectParameter("Price30minTo", price30minTo) :
+                new ObjectParameter("Price30minTo", typeof(int));
+    
+            var price15minFromParameter = price15minFrom.HasValue ?
+                new ObjectParameter("Price15minFrom", price15minFrom) :
+                new ObjectParameter("Price15minFrom", typeof(int));
+    
+            var price15minToParameter = price15minTo.HasValue ?
+                new ObjectParameter("Price15minTo", price15minTo) :
+                new ObjectParameter("Price15minTo", typeof(int));
+    
+            var priceAllNightFromParameter = priceAllNightFrom.HasValue ?
+                new ObjectParameter("PriceAllNightFrom", priceAllNightFrom) :
+                new ObjectParameter("PriceAllNightFrom", typeof(int));
+    
+            var priceAllNightToParameter = priceAllNightTo.HasValue ?
+                new ObjectParameter("PriceAllNightTo", priceAllNightTo) :
+                new ObjectParameter("PriceAllNightTo", typeof(int));
+    
+            var outCallsIdParameter = outCallsId.HasValue ?
+                new ObjectParameter("OutCallsId", outCallsId) :
+                new ObjectParameter("OutCallsId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Advertisement>("AdvertisementPagging", mergeOption, totalPages, pageNoParameter, pageSizeParameter, sortColumnParameter, sortOrderParameter, cityIdParameter, voivodeshipIdParameter, ageFromParameter, ageToParameter, weightFromParameter, weightToParameter, bustSizeFromParameter, bustSizeToParameter, englishParameter, germanParameter, russianParameter, price1hFromParameter, price1hToParameter, price30minFromParameter, price30minToParameter, price15minFromParameter, price15minToParameter, priceAllNightFromParameter, priceAllNightToParameter, outCallsIdParameter);
+        }
     }
 }

@@ -4,12 +4,31 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EscortServicesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EscortServicesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EscortServices.dbo.Advertisement' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Advertisement">
           <Key>
             <PropertyRef Name="Id" />
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <PropertyRef Name="Date" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Password" Type="char" MaxLength="32" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CityId" Type="smallint" Nullable="false" />
@@ -44,28 +63,95 @@
           <Property Name="SatTo" Type="time" Precision="0" />
           <Property Name="SunFrom" Type="time" Precision="0" />
           <Property Name="SunTo" Type="time" Precision="0" />
-          <Property Name="ContentPL" Type="ntext" />
-          <Property Name="ContentEN" Type="ntext" />
-          <Property Name="ContentDE" Type="ntext" />
-          <Property Name="ContentRU" Type="ntext" />
+          <Property Name="ContentPL" Type="nvarchar(max)" />
+          <Property Name="ContentEN" Type="nvarchar(max)" />
+          <Property Name="ContentDE" Type="nvarchar(max)" />
+          <Property Name="ContentRU" Type="nvarchar(max)" />
+          <Property Name="PublicId" Type="nvarchar" MaxLength="61" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="0" Nullable="false" />
         </EntityType>
-        <Function Name="GetDistrictByCityId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="CityId" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="SearchCityByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="name" Type="varchar" Mode="In" />
+        <Function Name="AdvertisementPagging" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TotalPages" Type="int" Mode="InOut" />
+          <Parameter Name="PageNo" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="SortColumn" Type="nvarchar" Mode="In" />
+          <Parameter Name="SortOrder" Type="nvarchar" Mode="In" />
+          <Parameter Name="CityId" Type="int" Mode="In" />
+          <Parameter Name="VoivodeshipId" Type="int" Mode="In" />
+          <Parameter Name="AgeFrom" Type="int" Mode="In" />
+          <Parameter Name="AgeTo" Type="int" Mode="In" />
+          <Parameter Name="WeightFrom" Type="int" Mode="In" />
+          <Parameter Name="WeightTo" Type="int" Mode="In" />
+          <Parameter Name="BustSizeFrom" Type="int" Mode="In" />
+          <Parameter Name="BustSizeTo" Type="int" Mode="In" />
+          <Parameter Name="English" Type="bit" Mode="In" />
+          <Parameter Name="German" Type="bit" Mode="In" />
+          <Parameter Name="Russian" Type="bit" Mode="In" />
+          <Parameter Name="Price1hFrom" Type="int" Mode="In" />
+          <Parameter Name="Price1hTo" Type="int" Mode="In" />
+          <Parameter Name="Price30minFrom" Type="int" Mode="In" />
+          <Parameter Name="Price30minTo" Type="int" Mode="In" />
+          <Parameter Name="Price15minFrom" Type="int" Mode="In" />
+          <Parameter Name="Price15minTo" Type="int" Mode="In" />
+          <Parameter Name="PriceAllNightFrom" Type="int" Mode="In" />
+          <Parameter Name="PriceAllNightTo" Type="int" Mode="In" />
+          <Parameter Name="OutCallsId" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="EscortServicesModelStoreContainer">
-          <EntitySet Name="Advertisement" EntityType="Self.Advertisement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Advertisement" EntityType="Self.Advertisement" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Advertisement].[Id] AS [Id], 
+    [Advertisement].[Password] AS [Password], 
+    [Advertisement].[Name] AS [Name], 
+    [Advertisement].[CityId] AS [CityId], 
+    [Advertisement].[CityName] AS [CityName], 
+    [Advertisement].[VoivodeshipId] AS [VoivodeshipId], 
+    [Advertisement].[VoivodeshipName] AS [VoivodeshipName], 
+    [Advertisement].[Address] AS [Address], 
+    [Advertisement].[Email] AS [Email], 
+    [Advertisement].[Telephone] AS [Telephone], 
+    [Advertisement].[Age] AS [Age], 
+    [Advertisement].[Weight] AS [Weight], 
+    [Advertisement].[BustSize] AS [BustSize], 
+    [Advertisement].[English] AS [English], 
+    [Advertisement].[German] AS [German], 
+    [Advertisement].[Russian] AS [Russian], 
+    [Advertisement].[Price1h] AS [Price1h], 
+    [Advertisement].[Price30min] AS [Price30min], 
+    [Advertisement].[Price15min] AS [Price15min], 
+    [Advertisement].[PriceAllNight] AS [PriceAllNight], 
+    [Advertisement].[OutCallsId] AS [OutCallsId], 
+    [Advertisement].[MonFrom] AS [MonFrom], 
+    [Advertisement].[MonTo] AS [MonTo], 
+    [Advertisement].[TueFrom] AS [TueFrom], 
+    [Advertisement].[TueTo] AS [TueTo], 
+    [Advertisement].[WedFrom] AS [WedFrom], 
+    [Advertisement].[WedTo] AS [WedTo], 
+    [Advertisement].[ThuFrom] AS [ThuFrom], 
+    [Advertisement].[ThuTo] AS [ThuTo], 
+    [Advertisement].[FriFrom] AS [FriFrom], 
+    [Advertisement].[FroTo] AS [FroTo], 
+    [Advertisement].[SatFrom] AS [SatFrom], 
+    [Advertisement].[SatTo] AS [SatTo], 
+    [Advertisement].[SunFrom] AS [SunFrom], 
+    [Advertisement].[SunTo] AS [SunTo], 
+    [Advertisement].[ContentPL] AS [ContentPL], 
+    [Advertisement].[ContentEN] AS [ContentEN], 
+    [Advertisement].[ContentDE] AS [ContentDE], 
+    [Advertisement].[ContentRU] AS [ContentRU], 
+    [Advertisement].[PublicId] AS [PublicId], 
+    [Advertisement].[Date] AS [Date]
+    FROM [dbo].[Advertisement] AS [Advertisement]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EscortServicesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Advertisement">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="32" FixedLength="true" Unicode="false" Nullable="false" />
@@ -106,6 +192,8 @@
           <Property Name="ContentEN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ContentDE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ContentRU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PublicId" Type="String" Nullable="false" MaxLength="61" Unicode="true" FixedLength="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityContainer Name="EscortServicesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Advertisement" EntityType="Self.Advertisement" />
@@ -114,6 +202,33 @@
           </FunctionImport>
           <FunctionImport Name="SearchCityByName" ReturnType="Collection(EscortServicesModel.SearchCityByName_Result)">
             <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AdvertisementPagging" EntitySet="Advertisement" ReturnType="Collection(EscortServicesModel.Advertisement)">
+            <Parameter Name="TotalPages" Mode="InOut" Type="Int32" />
+            <Parameter Name="PageNo" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="SortColumn" Mode="In" Type="String" />
+            <Parameter Name="SortOrder" Mode="In" Type="String" />
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="VoivodeshipId" Mode="In" Type="Int32" />
+            <Parameter Name="AgeFrom" Mode="In" Type="Int32" />
+            <Parameter Name="AgeTo" Mode="In" Type="Int32" />
+            <Parameter Name="WeightFrom" Mode="In" Type="Int32" />
+            <Parameter Name="WeightTo" Mode="In" Type="Int32" />
+            <Parameter Name="BustSizeFrom" Mode="In" Type="Int32" />
+            <Parameter Name="BustSizeTo" Mode="In" Type="Int32" />
+            <Parameter Name="English" Mode="In" Type="Boolean" />
+            <Parameter Name="German" Mode="In" Type="Boolean" />
+            <Parameter Name="Russian" Mode="In" Type="Boolean" />
+            <Parameter Name="Price1hFrom" Mode="In" Type="Int32" />
+            <Parameter Name="Price1hTo" Mode="In" Type="Int32" />
+            <Parameter Name="Price30minFrom" Mode="In" Type="Int32" />
+            <Parameter Name="Price30minTo" Mode="In" Type="Int32" />
+            <Parameter Name="Price15minFrom" Mode="In" Type="Int32" />
+            <Parameter Name="Price15minTo" Mode="In" Type="Int32" />
+            <Parameter Name="PriceAllNightFrom" Mode="In" Type="Int32" />
+            <Parameter Name="PriceAllNightTo" Mode="In" Type="Int32" />
+            <Parameter Name="OutCallsId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetDistrictByCityId_Result">
@@ -126,78 +241,106 @@
           <Property Type="String" Name="VoivodeshipId" Nullable="true" MaxLength="2" />
           <Property Type="String" Name="VoivodeshipName" Nullable="true" MaxLength="36" />
         </ComplexType>
+        <ComplexType Name="AdvertisementPagging_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int16" Name="CityId" Nullable="false" />
+          <Property Type="String" Name="CityName" Nullable="false" MaxLength="50" />
+          <Property Type="Int16" Name="VoivodeshipId" Nullable="false" />
+          <Property Type="Byte" Name="VoivodeshipName" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="320" />
+          <Property Type="String" Name="Telephone" Nullable="false" MaxLength="30" />
+          <Property Type="Byte" Name="Age" Nullable="false" />
+          <Property Type="Byte" Name="Weight" Nullable="false" />
+          <Property Type="String" Name="BustSize" Nullable="false" MaxLength="2" />
+          <Property Type="Boolean" Name="English" Nullable="false" />
+          <Property Type="Boolean" Name="German" Nullable="false" />
+          <Property Type="Boolean" Name="Russian" Nullable="false" />
+          <Property Type="Int16" Name="Price1h" Nullable="false" />
+          <Property Type="Int16" Name="Price30min" Nullable="true" />
+          <Property Type="Int16" Name="Price15min" Nullable="true" />
+          <Property Type="Int16" Name="PriceAllNight" Nullable="true" />
+          <Property Type="Byte" Name="OutCallsId" Nullable="true" />
+          <Property Type="Time" Name="MonFrom" Nullable="true" />
+          <Property Type="Time" Name="MonTo" Nullable="true" />
+          <Property Type="Time" Name="TueFrom" Nullable="true" />
+          <Property Type="Time" Name="TueTo" Nullable="true" />
+          <Property Type="Time" Name="WedFrom" Nullable="true" />
+          <Property Type="Time" Name="WedTo" Nullable="true" />
+          <Property Type="Time" Name="ThuFrom" Nullable="true" />
+          <Property Type="Time" Name="ThuTo" Nullable="true" />
+          <Property Type="Time" Name="FriFrom" Nullable="true" />
+          <Property Type="Time" Name="FroTo" Nullable="true" />
+          <Property Type="Time" Name="SatFrom" Nullable="true" />
+          <Property Type="Time" Name="SatTo" Nullable="true" />
+          <Property Type="Time" Name="SunFrom" Nullable="true" />
+          <Property Type="Time" Name="SunTo" Nullable="true" />
+          <Property Type="String" Name="ContentPL" Nullable="true" />
+          <Property Type="String" Name="ContentEN" Nullable="true" />
+          <Property Type="String" Name="ContentDE" Nullable="true" />
+          <Property Type="String" Name="ContentRU" Nullable="true" />
+          <Property Type="String" Name="PublicId" Nullable="false" MaxLength="61" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="EscortServicesModelStoreContainer" CdmEntityContainer="EscortServicesEntities">
-          <EntitySetMapping Name="Advertisement">
-            <EntityTypeMapping TypeName="EscortServicesModel.Advertisement">
-              <MappingFragment StoreEntitySet="Advertisement">
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EscortServicesModelStoreContainer" CdmEntityContainer="EscortServicesEntities">
+    <EntitySetMapping Name="Advertisement">
+      <EntityTypeMapping TypeName="IsTypeOf(EscortServicesModel.Advertisement)">
+        <MappingFragment StoreEntitySet="Advertisement">
+          <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="VoivodeshipId" ColumnName="VoivodeshipId" />
-                <ScalarProperty Name="VoivodeshipName" ColumnName="VoivodeshipName" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="BustSize" ColumnName="BustSize" />
-                <ScalarProperty Name="English" ColumnName="English" />
-                <ScalarProperty Name="German" ColumnName="German" />
-                <ScalarProperty Name="Russian" ColumnName="Russian" />
-                <ScalarProperty Name="Price1h" ColumnName="Price1h" />
-                <ScalarProperty Name="Price30min" ColumnName="Price30min" />
-                <ScalarProperty Name="Price15min" ColumnName="Price15min" />
-                <ScalarProperty Name="PriceAllNight" ColumnName="PriceAllNight" />
-                <ScalarProperty Name="OutCallsId" ColumnName="OutCallsId" />
-                <ScalarProperty Name="MonFrom" ColumnName="MonFrom" />
-                <ScalarProperty Name="MonTo" ColumnName="MonTo" />
-                <ScalarProperty Name="TueFrom" ColumnName="TueFrom" />
-                <ScalarProperty Name="TueTo" ColumnName="TueTo" />
-                <ScalarProperty Name="WedFrom" ColumnName="WedFrom" />
-                <ScalarProperty Name="WedTo" ColumnName="WedTo" />
-                <ScalarProperty Name="ThuFrom" ColumnName="ThuFrom" />
-                <ScalarProperty Name="ThuTo" ColumnName="ThuTo" />
-                <ScalarProperty Name="FriFrom" ColumnName="FriFrom" />
-                <ScalarProperty Name="FroTo" ColumnName="FroTo" />
-                <ScalarProperty Name="SatFrom" ColumnName="SatFrom" />
-                <ScalarProperty Name="SatTo" ColumnName="SatTo" />
-                <ScalarProperty Name="SunFrom" ColumnName="SunFrom" />
-                <ScalarProperty Name="SunTo" ColumnName="SunTo" />
-                <ScalarProperty Name="ContentPL" ColumnName="ContentPL" />
-                <ScalarProperty Name="ContentEN" ColumnName="ContentEN" />
-                <ScalarProperty Name="ContentDE" ColumnName="ContentDE" />
-                <ScalarProperty Name="ContentRU" ColumnName="ContentRU" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetDistrictByCityId" FunctionName="EscortServicesModel.Store.GetDistrictByCityId">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="EscortServicesModel.GetDistrictByCityId_Result">
-                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
-                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="VoivodeshipId" ColumnName="VoivodeshipId" />
+          <ScalarProperty Name="VoivodeshipName" ColumnName="VoivodeshipName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="BustSize" ColumnName="BustSize" />
+          <ScalarProperty Name="English" ColumnName="English" />
+          <ScalarProperty Name="German" ColumnName="German" />
+          <ScalarProperty Name="Russian" ColumnName="Russian" />
+          <ScalarProperty Name="Price1h" ColumnName="Price1h" />
+          <ScalarProperty Name="Price30min" ColumnName="Price30min" />
+          <ScalarProperty Name="Price15min" ColumnName="Price15min" />
+          <ScalarProperty Name="PriceAllNight" ColumnName="PriceAllNight" />
+          <ScalarProperty Name="OutCallsId" ColumnName="OutCallsId" />
+          <ScalarProperty Name="MonFrom" ColumnName="MonFrom" />
+          <ScalarProperty Name="MonTo" ColumnName="MonTo" />
+          <ScalarProperty Name="TueFrom" ColumnName="TueFrom" />
+          <ScalarProperty Name="TueTo" ColumnName="TueTo" />
+          <ScalarProperty Name="WedFrom" ColumnName="WedFrom" />
+          <ScalarProperty Name="WedTo" ColumnName="WedTo" />
+          <ScalarProperty Name="ThuFrom" ColumnName="ThuFrom" />
+          <ScalarProperty Name="ThuTo" ColumnName="ThuTo" />
+          <ScalarProperty Name="FriFrom" ColumnName="FriFrom" />
+          <ScalarProperty Name="FroTo" ColumnName="FroTo" />
+          <ScalarProperty Name="SatFrom" ColumnName="SatFrom" />
+          <ScalarProperty Name="SatTo" ColumnName="SatTo" />
+          <ScalarProperty Name="SunFrom" ColumnName="SunFrom" />
+          <ScalarProperty Name="SunTo" ColumnName="SunTo" />
+          <ScalarProperty Name="ContentPL" ColumnName="ContentPL" />
+          <ScalarProperty Name="ContentEN" ColumnName="ContentEN" />
+          <ScalarProperty Name="ContentDE" ColumnName="ContentDE" />
+          <ScalarProperty Name="ContentRU" ColumnName="ContentRU" />
+          <ScalarProperty Name="PublicId" ColumnName="PublicId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AdvertisementPagging" FunctionName="EscortServicesModel.Store.AdvertisementPagging">
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SearchCityByName" FunctionName="EscortServicesModel.Store.SearchCityByName">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="EscortServicesModel.SearchCityByName_Result">
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="VoivodeshipId" ColumnName="VoivodeshipId" />
-                <ScalarProperty Name="VoivodeshipName" ColumnName="VoivodeshipName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -211,7 +354,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
