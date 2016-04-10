@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity.Core.Objects;
 using EscortServices.DataAccess.DTOs;
+using System.IO;
 
 namespace EscortServices.DataAccess.Repository
 {
@@ -29,20 +30,37 @@ namespace EscortServices.DataAccess.Repository
             _context.SaveChanges();
         }
 
-        public IQueryable<Advertisement> GetList(out int totalPages, AdvertisementPaggingDto parameters)
+        public List<Advertisement> GetList(out int totalPages, AdvertisementPaggingDto parameters)
         {
             var totalPagesOp = new ObjectParameter("TotalPages", typeof(int));
 
-            var res =_context.AdvertisementPagging(totalPagesOp, parameters.pageNo, parameters.pageSize, parameters.sortColumn, 
-                parameters.sortOrder, parameters.cityId, parameters.voivodeshipId, parameters.ageFrom, parameters.ageTo, 
-                parameters.weightFrom, parameters.weightTo, parameters.bustSizeFrom, parameters.bustSizeTo, parameters.english,
-                parameters.german, parameters.russian, parameters.price1hFrom, parameters.price1hTo, parameters.price30minFrom, 
-                parameters.price30minTo, parameters.price15minFrom, parameters.price15minTo, parameters.priceAllNightFrom,
-                parameters.priceAllNightTo, parameters.outCallsId).AsQueryable();
 
+            using (var sqlLogFile = new StreamWriter(@"C:\Users\pko-darek\Desktop\sqlLogFile.txt"))
+            {
+                _context.Database.Log = sqlLogFile.Write;
+
+                var query1 = _context.AdvertisementPagging(totalPagesOp, parameters.PageNo, parameters.PageSize, parameters.SortColumn,
+              parameters.SortOrder, parameters.CityId, parameters.VoivodeshipId, parameters.AgeFrom, parameters.AgeTo,
+              parameters.WeightFrom, parameters.WeightTo, parameters.BustSizeFrom, parameters.BustSizeTo, parameters.English,
+              parameters.German, parameters.Russian, parameters.Price1hFrom, parameters.Price1hTo, parameters.Price30minFrom,
+              parameters.Price30minTo, parameters.Price15minFrom, parameters.Price15minTo, parameters.PriceAllNightFrom,
+              parameters.PriceAllNightTo, parameters.OutCallsId).ToList();
+                _context.SaveChanges();
+            }
+
+            var query =_context.AdvertisementPagging(totalPagesOp, parameters.PageNo, parameters.PageSize, parameters.SortColumn, 
+                parameters.SortOrder, parameters.CityId, parameters.VoivodeshipId, parameters.AgeFrom, parameters.AgeTo, 
+                parameters.WeightFrom, parameters.WeightTo, parameters.BustSizeFrom, parameters.BustSizeTo, parameters.English,
+                parameters.German, parameters.Russian, parameters.Price1hFrom, parameters.Price1hTo, parameters.Price30minFrom, 
+                parameters.Price30minTo, parameters.Price15minFrom, parameters.Price15minTo, parameters.PriceAllNightFrom,
+                parameters.PriceAllNightTo, parameters.OutCallsId).AsQueryable();
+            var sql = ((System.Data.Entity.Core.Objects.ObjectQuery)query).ToTraceString();
+            var res= query.ToList();
             totalPages = (int)totalPagesOp.Value;
 
             return res;
+
+
         }
     }
 }
