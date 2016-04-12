@@ -27,8 +27,8 @@ namespace EscortServices.DataAccess.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Advertisement> Advertisement { get; set; }
         public virtual DbSet<Parameter> Parameter { get; set; }
+        public virtual DbSet<Advertisement> Advertisement { get; set; }
     
         public virtual ObjectResult<GetDistrictByCityId_Result> GetDistrictByCityId(string cityId)
         {
@@ -48,7 +48,7 @@ namespace EscortServices.DataAccess.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCityByName_Result>("SearchCityByName", nameParameter);
         }
     
-        public virtual ObjectResult<Advertisement> AdvertisementPagging(ObjectParameter totalPages, Nullable<int> pageNo, Nullable<int> pageSize, string sortColumn, string sortOrder, Nullable<int> cityId, Nullable<int> voivodeshipId, Nullable<int> ageFrom, Nullable<int> ageTo, Nullable<int> weightFrom, Nullable<int> weightTo, Nullable<int> bustSizeFrom, Nullable<int> bustSizeTo, Nullable<bool> english, Nullable<bool> german, Nullable<bool> russian, Nullable<int> price1hFrom, Nullable<int> price1hTo, Nullable<int> price30minFrom, Nullable<int> price30minTo, Nullable<int> price15minFrom, Nullable<int> price15minTo, Nullable<int> priceAllNightFrom, Nullable<int> priceAllNightTo, Nullable<int> outCallsId)
+        public virtual ObjectResult<Advertisement> AdvertisementPagging(ObjectParameter totalPages, Nullable<int> pageNo, Nullable<int> pageSize, string sortColumn, Nullable<bool> isAsc, Nullable<int> cityId, Nullable<int> voivodeshipId, Nullable<int> ageFrom, Nullable<int> ageTo, Nullable<int> weightFrom, Nullable<int> weightTo, Nullable<int> bustSizeFrom, Nullable<int> bustSizeTo, Nullable<bool> isEnglish, Nullable<bool> isGerman, Nullable<bool> isRussian, Nullable<int> price1hFrom, Nullable<int> price1hTo, Nullable<int> price30minFrom, Nullable<int> price30minTo, Nullable<int> price15minFrom, Nullable<int> price15minTo, Nullable<int> priceAllNightFrom, Nullable<int> priceAllNightTo, Nullable<int> outCallsId)
         {
             var pageNoParameter = pageNo.HasValue ?
                 new ObjectParameter("PageNo", pageNo) :
@@ -62,9 +62,9 @@ namespace EscortServices.DataAccess.Model
                 new ObjectParameter("SortColumn", sortColumn) :
                 new ObjectParameter("SortColumn", typeof(string));
     
-            var sortOrderParameter = sortOrder != null ?
-                new ObjectParameter("SortOrder", sortOrder) :
-                new ObjectParameter("SortOrder", typeof(string));
+            var isAscParameter = isAsc.HasValue ?
+                new ObjectParameter("IsAsc", isAsc) :
+                new ObjectParameter("IsAsc", typeof(bool));
     
             var cityIdParameter = cityId.HasValue ?
                 new ObjectParameter("CityId", cityId) :
@@ -98,17 +98,17 @@ namespace EscortServices.DataAccess.Model
                 new ObjectParameter("BustSizeTo", bustSizeTo) :
                 new ObjectParameter("BustSizeTo", typeof(int));
     
-            var englishParameter = english.HasValue ?
-                new ObjectParameter("English", english) :
-                new ObjectParameter("English", typeof(bool));
+            var isEnglishParameter = isEnglish.HasValue ?
+                new ObjectParameter("IsEnglish", isEnglish) :
+                new ObjectParameter("IsEnglish", typeof(bool));
     
-            var germanParameter = german.HasValue ?
-                new ObjectParameter("German", german) :
-                new ObjectParameter("German", typeof(bool));
+            var isGermanParameter = isGerman.HasValue ?
+                new ObjectParameter("IsGerman", isGerman) :
+                new ObjectParameter("IsGerman", typeof(bool));
     
-            var russianParameter = russian.HasValue ?
-                new ObjectParameter("Russian", russian) :
-                new ObjectParameter("Russian", typeof(bool));
+            var isRussianParameter = isRussian.HasValue ?
+                new ObjectParameter("IsRussian", isRussian) :
+                new ObjectParameter("IsRussian", typeof(bool));
     
             var price1hFromParameter = price1hFrom.HasValue ?
                 new ObjectParameter("Price1hFrom", price1hFrom) :
@@ -146,10 +146,10 @@ namespace EscortServices.DataAccess.Model
                 new ObjectParameter("OutCallsId", outCallsId) :
                 new ObjectParameter("OutCallsId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Advertisement>("AdvertisementPagging", totalPages, pageNoParameter, pageSizeParameter, sortColumnParameter, sortOrderParameter, cityIdParameter, voivodeshipIdParameter, ageFromParameter, ageToParameter, weightFromParameter, weightToParameter, bustSizeFromParameter, bustSizeToParameter, englishParameter, germanParameter, russianParameter, price1hFromParameter, price1hToParameter, price30minFromParameter, price30minToParameter, price15minFromParameter, price15minToParameter, priceAllNightFromParameter, priceAllNightToParameter, outCallsIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Advertisement>("AdvertisementPagging", totalPages, pageNoParameter, pageSizeParameter, sortColumnParameter, isAscParameter, cityIdParameter, voivodeshipIdParameter, ageFromParameter, ageToParameter, weightFromParameter, weightToParameter, bustSizeFromParameter, bustSizeToParameter, isEnglishParameter, isGermanParameter, isRussianParameter, price1hFromParameter, price1hToParameter, price30minFromParameter, price30minToParameter, price15minFromParameter, price15minToParameter, priceAllNightFromParameter, priceAllNightToParameter, outCallsIdParameter);
         }
     
-        public virtual ObjectResult<Advertisement> AdvertisementPagging(ObjectParameter totalPages, Nullable<int> pageNo, Nullable<int> pageSize, string sortColumn, string sortOrder, Nullable<int> cityId, Nullable<int> voivodeshipId, Nullable<int> ageFrom, Nullable<int> ageTo, Nullable<int> weightFrom, Nullable<int> weightTo, Nullable<int> bustSizeFrom, Nullable<int> bustSizeTo, Nullable<bool> english, Nullable<bool> german, Nullable<bool> russian, Nullable<int> price1hFrom, Nullable<int> price1hTo, Nullable<int> price30minFrom, Nullable<int> price30minTo, Nullable<int> price15minFrom, Nullable<int> price15minTo, Nullable<int> priceAllNightFrom, Nullable<int> priceAllNightTo, Nullable<int> outCallsId, MergeOption mergeOption)
+        public virtual ObjectResult<Advertisement> AdvertisementPagging(ObjectParameter totalPages, Nullable<int> pageNo, Nullable<int> pageSize, string sortColumn, Nullable<bool> isAsc, Nullable<int> cityId, Nullable<int> voivodeshipId, Nullable<int> ageFrom, Nullable<int> ageTo, Nullable<int> weightFrom, Nullable<int> weightTo, Nullable<int> bustSizeFrom, Nullable<int> bustSizeTo, Nullable<bool> isEnglish, Nullable<bool> isGerman, Nullable<bool> isRussian, Nullable<int> price1hFrom, Nullable<int> price1hTo, Nullable<int> price30minFrom, Nullable<int> price30minTo, Nullable<int> price15minFrom, Nullable<int> price15minTo, Nullable<int> priceAllNightFrom, Nullable<int> priceAllNightTo, Nullable<int> outCallsId, MergeOption mergeOption)
         {
             var pageNoParameter = pageNo.HasValue ?
                 new ObjectParameter("PageNo", pageNo) :
@@ -163,9 +163,9 @@ namespace EscortServices.DataAccess.Model
                 new ObjectParameter("SortColumn", sortColumn) :
                 new ObjectParameter("SortColumn", typeof(string));
     
-            var sortOrderParameter = sortOrder != null ?
-                new ObjectParameter("SortOrder", sortOrder) :
-                new ObjectParameter("SortOrder", typeof(string));
+            var isAscParameter = isAsc.HasValue ?
+                new ObjectParameter("IsAsc", isAsc) :
+                new ObjectParameter("IsAsc", typeof(bool));
     
             var cityIdParameter = cityId.HasValue ?
                 new ObjectParameter("CityId", cityId) :
@@ -199,17 +199,17 @@ namespace EscortServices.DataAccess.Model
                 new ObjectParameter("BustSizeTo", bustSizeTo) :
                 new ObjectParameter("BustSizeTo", typeof(int));
     
-            var englishParameter = english.HasValue ?
-                new ObjectParameter("English", english) :
-                new ObjectParameter("English", typeof(bool));
+            var isEnglishParameter = isEnglish.HasValue ?
+                new ObjectParameter("IsEnglish", isEnglish) :
+                new ObjectParameter("IsEnglish", typeof(bool));
     
-            var germanParameter = german.HasValue ?
-                new ObjectParameter("German", german) :
-                new ObjectParameter("German", typeof(bool));
+            var isGermanParameter = isGerman.HasValue ?
+                new ObjectParameter("IsGerman", isGerman) :
+                new ObjectParameter("IsGerman", typeof(bool));
     
-            var russianParameter = russian.HasValue ?
-                new ObjectParameter("Russian", russian) :
-                new ObjectParameter("Russian", typeof(bool));
+            var isRussianParameter = isRussian.HasValue ?
+                new ObjectParameter("IsRussian", isRussian) :
+                new ObjectParameter("IsRussian", typeof(bool));
     
             var price1hFromParameter = price1hFrom.HasValue ?
                 new ObjectParameter("Price1hFrom", price1hFrom) :
@@ -247,7 +247,7 @@ namespace EscortServices.DataAccess.Model
                 new ObjectParameter("OutCallsId", outCallsId) :
                 new ObjectParameter("OutCallsId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Advertisement>("AdvertisementPagging", mergeOption, totalPages, pageNoParameter, pageSizeParameter, sortColumnParameter, sortOrderParameter, cityIdParameter, voivodeshipIdParameter, ageFromParameter, ageToParameter, weightFromParameter, weightToParameter, bustSizeFromParameter, bustSizeToParameter, englishParameter, germanParameter, russianParameter, price1hFromParameter, price1hToParameter, price30minFromParameter, price30minToParameter, price15minFromParameter, price15minToParameter, priceAllNightFromParameter, priceAllNightToParameter, outCallsIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Advertisement>("AdvertisementPagging", mergeOption, totalPages, pageNoParameter, pageSizeParameter, sortColumnParameter, isAscParameter, cityIdParameter, voivodeshipIdParameter, ageFromParameter, ageToParameter, weightFromParameter, weightToParameter, bustSizeFromParameter, bustSizeToParameter, isEnglishParameter, isGermanParameter, isRussianParameter, price1hFromParameter, price1hToParameter, price30minFromParameter, price30minToParameter, price15minFromParameter, price15minToParameter, priceAllNightFromParameter, priceAllNightToParameter, outCallsIdParameter);
         }
     }
 }

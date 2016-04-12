@@ -29,9 +29,9 @@
           <Property Name="Age" Type="tinyint" Nullable="false" />
           <Property Name="Weight" Type="tinyint" Nullable="false" />
           <Property Name="BustSize" Type="varchar" MaxLength="2" Nullable="false" />
-          <Property Name="English" Type="bit" Nullable="false" />
-          <Property Name="German" Type="bit" Nullable="false" />
-          <Property Name="Russian" Type="bit" Nullable="false" />
+          <Property Name="IsEnglish" Type="bit" Nullable="false" />
+          <Property Name="IsGerman" Type="bit" Nullable="false" />
+          <Property Name="IsRussian" Type="bit" Nullable="false" />
           <Property Name="Price1h" Type="smallint" Nullable="false" />
           <Property Name="Price30min" Type="smallint" />
           <Property Name="Price15min" Type="smallint" />
@@ -63,7 +63,7 @@
           <Parameter Name="PageNo" Type="int" Mode="In" />
           <Parameter Name="PageSize" Type="int" Mode="In" />
           <Parameter Name="SortColumn" Type="nvarchar" Mode="In" />
-          <Parameter Name="SortOrder" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsAsc" Type="bit" Mode="In" />
           <Parameter Name="CityId" Type="int" Mode="In" />
           <Parameter Name="VoivodeshipId" Type="int" Mode="In" />
           <Parameter Name="AgeFrom" Type="int" Mode="In" />
@@ -72,9 +72,9 @@
           <Parameter Name="WeightTo" Type="int" Mode="In" />
           <Parameter Name="BustSizeFrom" Type="int" Mode="In" />
           <Parameter Name="BustSizeTo" Type="int" Mode="In" />
-          <Parameter Name="English" Type="bit" Mode="In" />
-          <Parameter Name="German" Type="bit" Mode="In" />
-          <Parameter Name="Russian" Type="bit" Mode="In" />
+          <Parameter Name="IsEnglish" Type="bit" Mode="In" />
+          <Parameter Name="IsGerman" Type="bit" Mode="In" />
+          <Parameter Name="IsRussian" Type="bit" Mode="In" />
           <Parameter Name="Price1hFrom" Type="int" Mode="In" />
           <Parameter Name="Price1hTo" Type="int" Mode="In" />
           <Parameter Name="Price30minFrom" Type="int" Mode="In" />
@@ -100,19 +100,20 @@
     <edmx:ConceptualModels>
       <Schema Namespace="EscortServicesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="EscortServicesEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Advertisement" EntityType="EscortServicesModel.Advertisement" />
           <FunctionImport Name="GetDistrictByCityId" ReturnType="Collection(EscortServicesModel.GetDistrictByCityId_Result)">
           <Parameter Name="CityId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SearchCityByName" ReturnType="Collection(EscortServicesModel.SearchCityByName_Result)">
           <Parameter Name="name" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Parameter" EntityType="EscortServicesModel.Parameter" />
+          <EntitySet Name="Advertisement" EntityType="EscortServicesModel.Advertisement" />
           <FunctionImport Name="AdvertisementPagging" EntitySet="Advertisement" ReturnType="Collection(EscortServicesModel.Advertisement)">
             <Parameter Name="TotalPages" Mode="InOut" Type="Int32" />
             <Parameter Name="PageNo" Mode="In" Type="Int32" />
             <Parameter Name="PageSize" Mode="In" Type="Int32" />
             <Parameter Name="SortColumn" Mode="In" Type="String" />
-            <Parameter Name="SortOrder" Mode="In" Type="String" />
+            <Parameter Name="IsAsc" Mode="In" Type="Boolean" />
             <Parameter Name="CityId" Mode="In" Type="Int32" />
             <Parameter Name="VoivodeshipId" Mode="In" Type="Int32" />
             <Parameter Name="AgeFrom" Mode="In" Type="Int32" />
@@ -121,9 +122,9 @@
             <Parameter Name="WeightTo" Mode="In" Type="Int32" />
             <Parameter Name="BustSizeFrom" Mode="In" Type="Int32" />
             <Parameter Name="BustSizeTo" Mode="In" Type="Int32" />
-            <Parameter Name="English" Mode="In" Type="Boolean" />
-            <Parameter Name="German" Mode="In" Type="Boolean" />
-            <Parameter Name="Russian" Mode="In" Type="Boolean" />
+            <Parameter Name="IsEnglish" Mode="In" Type="Boolean" />
+            <Parameter Name="IsGerman" Mode="In" Type="Boolean" />
+            <Parameter Name="IsRussian" Mode="In" Type="Boolean" />
             <Parameter Name="Price1hFrom" Mode="In" Type="Int32" />
             <Parameter Name="Price1hTo" Mode="In" Type="Int32" />
             <Parameter Name="Price30minFrom" Mode="In" Type="Int32" />
@@ -134,8 +135,24 @@
             <Parameter Name="PriceAllNightTo" Mode="In" Type="Int32" />
             <Parameter Name="OutCallsId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="Parameter" EntityType="EscortServicesModel.Parameter" />
         </EntityContainer>
+        <ComplexType Name="GetDistrictByCityId_Result">
+          <Property Type="String" Name="DistrictId" Nullable="true" MaxLength="7" />
+          <Property Type="String" Name="DistrictName" Nullable="true" MaxLength="56" />
+        </ComplexType>
+        <ComplexType Name="SearchCityByName_Result">
+          <Property Type="String" Name="CityId" Nullable="true" MaxLength="7" />
+          <Property Type="String" Name="CityName" Nullable="true" MaxLength="56" />
+          <Property Type="String" Name="VoivodeshipId" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="VoivodeshipName" Nullable="true" MaxLength="36" />
+        </ComplexType>
+        <EntityType Name="Parameter">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Advertisement">
           <Key>
             <PropertyRef Name="Id" />
@@ -153,9 +170,9 @@
           <Property Name="Age" Type="Byte" Nullable="false" />
           <Property Name="Weight" Type="Byte" Nullable="false" />
           <Property Name="BustSize" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="English" Type="Boolean" Nullable="false" />
-          <Property Name="German" Type="Boolean" Nullable="false" />
-          <Property Name="Russian" Type="Boolean" Nullable="false" />
+          <Property Name="IsEnglish" Type="Boolean" Nullable="false" />
+          <Property Name="IsGerman" Type="Boolean" Nullable="false" />
+          <Property Name="IsRussian" Type="Boolean" Nullable="false" />
           <Property Name="Price1h" Type="Int16" Nullable="false" />
           <Property Name="Price30min" Type="Int16" />
           <Property Name="Price15min" Type="Int16" />
@@ -182,29 +199,38 @@
           <Property Name="PublicId" Type="String" Nullable="false" MaxLength="61" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
-        <ComplexType Name="GetDistrictByCityId_Result">
-          <Property Type="String" Name="DistrictId" Nullable="true" MaxLength="7" />
-          <Property Type="String" Name="DistrictName" Nullable="true" MaxLength="56" />
-        </ComplexType>
-        <ComplexType Name="SearchCityByName_Result">
-          <Property Type="String" Name="CityId" Nullable="true" MaxLength="7" />
-          <Property Type="String" Name="CityName" Nullable="true" MaxLength="56" />
-          <Property Type="String" Name="VoivodeshipId" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="VoivodeshipName" Nullable="true" MaxLength="36" />
-        </ComplexType>
-        <EntityType Name="Parameter">
-          <Key>
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Value" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="EscortServicesModelStoreContainer" CdmEntityContainer="EscortServicesEntities">
+          <FunctionImportMapping FunctionImportName="GetDistrictByCityId" FunctionName="EscortServicesModel.Store.GetDistrictByCityId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EscortServicesModel.GetDistrictByCityId_Result">
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SearchCityByName" FunctionName="EscortServicesModel.Store.SearchCityByName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EscortServicesModel.SearchCityByName_Result">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="VoivodeshipId" ColumnName="VoivodeshipId" />
+                <ScalarProperty Name="VoivodeshipName" ColumnName="VoivodeshipName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Parameter">
+            <EntityTypeMapping TypeName="EscortServicesModel.Parameter">
+              <MappingFragment StoreEntitySet="Parameter">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Advertisement">
             <EntityTypeMapping TypeName="EscortServicesModel.Advertisement">
               <MappingFragment StoreEntitySet="Advertisement">
@@ -233,9 +259,9 @@
                 <ScalarProperty Name="Price15min" ColumnName="Price15min" />
                 <ScalarProperty Name="Price30min" ColumnName="Price30min" />
                 <ScalarProperty Name="Price1h" ColumnName="Price1h" />
-                <ScalarProperty Name="Russian" ColumnName="Russian" />
-                <ScalarProperty Name="German" ColumnName="German" />
-                <ScalarProperty Name="English" ColumnName="English" />
+                <ScalarProperty Name="IsRussian" ColumnName="IsRussian" />
+                <ScalarProperty Name="IsGerman" ColumnName="IsGerman" />
+                <ScalarProperty Name="IsEnglish" ColumnName="IsEnglish" />
                 <ScalarProperty Name="BustSize" ColumnName="BustSize" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
@@ -252,34 +278,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetDistrictByCityId" FunctionName="EscortServicesModel.Store.GetDistrictByCityId">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="EscortServicesModel.GetDistrictByCityId_Result">
-                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
-                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SearchCityByName" FunctionName="EscortServicesModel.Store.SearchCityByName">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="EscortServicesModel.SearchCityByName_Result">
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="VoivodeshipId" ColumnName="VoivodeshipId" />
-                <ScalarProperty Name="VoivodeshipName" ColumnName="VoivodeshipName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="AdvertisementPagging" FunctionName="EscortServicesModel.Store.AdvertisementPagging">
           </FunctionImportMapping>
-          <EntitySetMapping Name="Parameter">
-            <EntityTypeMapping TypeName="EscortServicesModel.Parameter">
-              <MappingFragment StoreEntitySet="Parameter">
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

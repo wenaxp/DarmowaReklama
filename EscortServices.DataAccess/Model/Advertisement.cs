@@ -27,9 +27,9 @@ namespace EscortServices.DataAccess.Model
         public byte Age { get; set; }
         public byte Weight { get; set; }
         public string BustSize { get; set; }
-        public bool English { get; set; }
-        public bool German { get; set; }
-        public bool Russian { get; set; }
+        public bool IsEnglish { get; set; }
+        public bool IsGerman { get; set; }
+        public bool IsRussian { get; set; }
         public short Price1h { get; set; }
         public Nullable<short> Price30min { get; set; }
         public Nullable<short> Price15min { get; set; }

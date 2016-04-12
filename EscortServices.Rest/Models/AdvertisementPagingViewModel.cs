@@ -11,7 +11,7 @@ namespace EscortServices.Rest.Models
         public int? PageNo { get; set; }
         public int? PageSize { get; set; }
         public string SortColumn { get; set; }
-        public string IsAsc { get; set; }
+        public bool? IsAsc { get; set; }
         public int? CityId { get; set; }
         public int? VoivodeshipId { get; set; }
         public int? AgeFrom { get; set; }
@@ -20,9 +20,9 @@ namespace EscortServices.Rest.Models
         public int? WeightTo { get; set; }
         public int? BustSizeFrom { get; set; }
         public int? BustSizeTo { get; set; }
-        public bool? English { get; set; }
-        public bool? German { get; set; }
-        public bool? Russian { get; set; }
+        public bool? IsEnglish { get; set; }
+        public bool? IsGerman { get; set; }
+        public bool? IsRussian { get; set; }
         public int? Price1hFrom { get; set; }
         public int? Price1hTo { get; set; }
         public int? Price30minFrom { get; set; }

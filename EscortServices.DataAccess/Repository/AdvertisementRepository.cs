@@ -51,7 +51,7 @@ namespace EscortServices.DataAccess.Repository
             advPagging.PageNo = advPagging.PageNo ?? 1;
             advPagging.PageSize = advPagging.PageSize ?? _parameterRepository.GetInt(ParameterNameEnum.AdvertisementPageSize);
             advPagging.SortColumn = advPagging.SortColumn ?? "Date";
-            advPagging.SortOrder = advPagging.SortOrder ?? "DSC";
+            advPagging.IsAsc = advPagging.IsAsc ?? false;
         }
 
         private void FillListAndTotalPages(AdvertisementPaggingDto advPagging)
@@ -59,9 +59,9 @@ namespace EscortServices.DataAccess.Repository
             var totalPagesOp = new ObjectParameter("TotalPages", typeof(int));
 
             var list = _context.AdvertisementPagging(totalPagesOp, advPagging.PageNo, advPagging.PageSize, advPagging.SortColumn,
-                advPagging.SortOrder, advPagging.CityId, advPagging.VoivodeshipId, advPagging.AgeFrom, advPagging.AgeTo,
-                advPagging.WeightFrom, advPagging.WeightTo, advPagging.BustSizeFrom, advPagging.BustSizeTo, advPagging.English,
-                advPagging.German, advPagging.Russian, advPagging.Price1hFrom, advPagging.Price1hTo, advPagging.Price30minFrom,
+                advPagging.IsAsc, advPagging.CityId, advPagging.VoivodeshipId, advPagging.AgeFrom, advPagging.AgeTo,
+                advPagging.WeightFrom, advPagging.WeightTo, advPagging.BustSizeFrom, advPagging.BustSizeTo, advPagging.IsEnglish,
+                advPagging.IsGerman, advPagging.IsRussian, advPagging.Price1hFrom, advPagging.Price1hTo, advPagging.Price30minFrom,
                 advPagging.Price30minTo, advPagging.Price15minFrom, advPagging.Price15minTo, advPagging.PriceAllNightFrom,
                 advPagging.PriceAllNightTo, advPagging.OutCallsId);
             advPagging.List = list.ToList();
