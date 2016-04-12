@@ -7,11 +7,11 @@ namespace EscortServices.Rest.Models
 {
     public class AdvertisementPagingViewModel
     {
-        public int TotalPages { get; set; }
+        public int? TotalPages { get; set; }
         public int? PageNo { get; set; }
         public int? PageSize { get; set; }
         public string SortColumn { get; set; }
-        public string SortOrder { get; set; }
+        public string IsAsc { get; set; }
         public int? CityId { get; set; }
         public int? VoivodeshipId { get; set; }
         public int? AgeFrom { get; set; }

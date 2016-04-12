@@ -12,9 +12,14 @@ namespace EscortServices.DataAccess.Repository
 {
     public class AdvertisementRepository: BaseRepository, IAdvertisementRepository
     {
-        public AdvertisementRepository(EscortServicesEntities context)
+        private readonly IParameterRepository _parameterRepository;
+
+        public AdvertisementRepository(EscortServicesEntities context, IParameterRepository parameterRepository)
             :base(context)
-        {}
+        {
+            _parameterRepository = parameterRepository;
+        }
+
         public Advertisement Get(string publicId)
         {
             var res = _context.Advertisement.Single(x => x.PublicId == publicId);
@@ -30,37 +35,37 @@ namespace EscortServices.DataAccess.Repository
             _context.SaveChanges();
         }
 
-        public List<Advertisement> GetList(out int totalPages, AdvertisementPaggingDto parameters)
+        public AdvertisementPaggingDto GetAdvertisementPagging(AdvertisementPaggingDto advPagging)
+        {
+            advPagging = advPagging ?? new AdvertisementPaggingDto();
+
+            FillPagging(advPagging);
+
+            FillListAndTotalPages(advPagging);
+
+            return advPagging;
+        }
+
+        private void FillPagging(AdvertisementPaggingDto advPagging)
+        {
+            advPagging.PageNo = advPagging.PageNo ?? 1;
+            advPagging.PageSize = advPagging.PageSize ?? _parameterRepository.GetInt(ParameterNameEnum.AdvertisementPageSize);
+            advPagging.SortColumn = advPagging.SortColumn ?? "Date";
+            advPagging.SortOrder = advPagging.SortOrder ?? "DSC";
+        }
+
+        private void FillListAndTotalPages(AdvertisementPaggingDto advPagging)
         {
             var totalPagesOp = new ObjectParameter("TotalPages", typeof(int));
 
-
-            using (var sqlLogFile = new StreamWriter(@"C:\Users\pko-darek\Desktop\sqlLogFile.txt"))
-            {
-                _context.Database.Log = sqlLogFile.Write;
-
-                var query1 = _context.AdvertisementPagging(totalPagesOp, parameters.PageNo, parameters.PageSize, parameters.SortColumn,
-              parameters.SortOrder, parameters.CityId, parameters.VoivodeshipId, parameters.AgeFrom, parameters.AgeTo,
-              parameters.WeightFrom, parameters.WeightTo, parameters.BustSizeFrom, parameters.BustSizeTo, parameters.English,
-              parameters.German, parameters.Russian, parameters.Price1hFrom, parameters.Price1hTo, parameters.Price30minFrom,
-              parameters.Price30minTo, parameters.Price15minFrom, parameters.Price15minTo, parameters.PriceAllNightFrom,
-              parameters.PriceAllNightTo, parameters.OutCallsId).ToList();
-                _context.SaveChanges();
-            }
-
-            var query =_context.AdvertisementPagging(totalPagesOp, parameters.PageNo, parameters.PageSize, parameters.SortColumn, 
-                parameters.SortOrder, parameters.CityId, parameters.VoivodeshipId, parameters.AgeFrom, parameters.AgeTo, 
-                parameters.WeightFrom, parameters.WeightTo, parameters.BustSizeFrom, parameters.BustSizeTo, parameters.English,
-                parameters.German, parameters.Russian, parameters.Price1hFrom, parameters.Price1hTo, parameters.Price30minFrom, 
-                parameters.Price30minTo, parameters.Price15minFrom, parameters.Price15minTo, parameters.PriceAllNightFrom,
-                parameters.PriceAllNightTo, parameters.OutCallsId).AsQueryable();
-            var sql = ((System.Data.Entity.Core.Objects.ObjectQuery)query).ToTraceString();
-            var res= query.ToList();
-            totalPages = (int)totalPagesOp.Value;
-
-            return res;
-
-
+            var list = _context.AdvertisementPagging(totalPagesOp, advPagging.PageNo, advPagging.PageSize, advPagging.SortColumn,
+                advPagging.SortOrder, advPagging.CityId, advPagging.VoivodeshipId, advPagging.AgeFrom, advPagging.AgeTo,
+                advPagging.WeightFrom, advPagging.WeightTo, advPagging.BustSizeFrom, advPagging.BustSizeTo, advPagging.English,
+                advPagging.German, advPagging.Russian, advPagging.Price1hFrom, advPagging.Price1hTo, advPagging.Price30minFrom,
+                advPagging.Price30minTo, advPagging.Price15minFrom, advPagging.Price15minTo, advPagging.PriceAllNightFrom,
+                advPagging.PriceAllNightTo, advPagging.OutCallsId);
+            advPagging.List = list.ToList();
+            advPagging.TotalPages = (int)(totalPagesOp.Value ?? 0);
         }
     }
 }

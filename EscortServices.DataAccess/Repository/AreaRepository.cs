@@ -13,13 +13,13 @@ namespace EscortServices.DataAccess.Repository
             : base(context)
         { }
 
-        public IQueryable<GetDistrictByCityId_Result> GetDistrictByCityId(string cityId)
+        public IEnumerable<GetDistrictByCityId_Result> GetDistrictByCityId(string cityId)
         {
             var res= _context.GetDistrictByCityId(cityId);
             return res.AsQueryable<GetDistrictByCityId_Result>();
         }
 
-        public IQueryable<SearchCityByName_Result> SearchCityByName(string name)
+        public IEnumerable<SearchCityByName_Result> SearchCityByName(string name)
         {
             var res = _context.SearchCityByName(name);
             return res.AsQueryable<SearchCityByName_Result>();

@@ -28,6 +28,7 @@ namespace EscortServices.DataAccess.Model
         }
     
         public virtual DbSet<Advertisement> Advertisement { get; set; }
+        public virtual DbSet<Parameter> Parameter { get; set; }
     
         public virtual ObjectResult<GetDistrictByCityId_Result> GetDistrictByCityId(string cityId)
         {

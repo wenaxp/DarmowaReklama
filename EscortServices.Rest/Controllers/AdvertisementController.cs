@@ -21,16 +21,28 @@ namespace EscortServices.Rest.Controllers
             _advertisementRepository = advertisementRepository;
             _mapper = mapper;
         }
+
+        [HttpPost]
+        public void Save(AdvertisementViewModel vModel)
+        {
+            var advertisementPaggingDto = _mapper.Map<AdvertisementViewModel, Advertisement>(vModel);
+            _advertisementRepository.Save(advertisementPaggingDto);
+        }
+
         [HttpGet]
-        //GET: api/Advertisement
+        public AdvertisementViewModel Get(string publicId)
+        {
+            var advertisermentList = _advertisementRepository.Get(publicId);
+            var vModel = _mapper.Map<Advertisement, AdvertisementViewModel>(advertisermentList);
+            return vModel;
+        }
+
+        [HttpGet]
         public AdvertisementPagingViewModel GetList(AdvertisementPagingViewModel vModel)
         {
-            vModel = vModel ?? new AdvertisementPagingViewModel();
             var advertisementPaggingDto = _mapper.Map<AdvertisementPagingViewModel, AdvertisementPaggingDto>(vModel);
-            int totalPages;
-            var advertisermentList = _advertisementRepository.GetList(out totalPages, advertisementPaggingDto);
-            vModel.TotalPages = totalPages;
-            vModel = _mapper.Map<IEnumerable<Advertisement>, AdvertisementPagingViewModel>(advertisermentList,vModel);
+            var advertisermentList = _advertisementRepository.GetAdvertisementPagging(advertisementPaggingDto);
+            vModel = _mapper.Map<AdvertisementPaggingDto, AdvertisementPagingViewModel>(advertisermentList, vModel);
             return vModel;
         }
 

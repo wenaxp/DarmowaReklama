@@ -55,9 +55,6 @@
     <Compile Include="Model\Advertisement.cs">
       <DependentUpon>EscortServicesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\AdvertisementPagging_Result.cs">
-      <DependentUpon>EscortServicesModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\EscortServicesModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -76,6 +73,9 @@
     <Compile Include="Model\GetDistrictByCityId_Result.cs">
       <DependentUpon>EscortServicesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Parameter.cs">
+      <DependentUpon>EscortServicesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\SearchCityByName_Result.cs">
       <DependentUpon>EscortServicesModel.tt</DependentUpon>
     </Compile>
@@ -84,6 +84,9 @@
     <Compile Include="Repository\AreaRepository.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\IAdvertisementRepository.cs" />
+    <Compile Include="Repository\IParameterRepository.cs" />
+    <Compile Include="Repository\ParameterNameEnum.cs" />
+    <Compile Include="Repository\ParameterRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

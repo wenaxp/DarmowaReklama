@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EscortServices.DataAccess.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,12 @@ namespace EscortServices.DataAccess.DTOs
 {
     public class AdvertisementPaggingDto
     {
-        public int? PageNo { get; private set; }
-        public int? PageSize { get; private set; }
-        public string SortColumn { get; private set; }
-        public string SortOrder { get; private set; }
+        public int? TotalPages { get; set; }
+
+        public int? PageNo { get; set; }
+        public int? PageSize { get; set; }
+        public string SortColumn { get; set; }
+        public string SortOrder { get; set; }
 
         public int? CityId { get; set; }
         public int? VoivodeshipId { get; set; }
@@ -33,5 +36,6 @@ namespace EscortServices.DataAccess.DTOs
         public int? PriceAllNightFrom { get; set; }
         public int? PriceAllNightTo { get; set; }
         public int? OutCallsId { get; set; }
+        public IEnumerable<Advertisement> List { get; set; }
     }
 }

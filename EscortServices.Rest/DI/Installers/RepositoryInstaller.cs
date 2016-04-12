@@ -19,6 +19,9 @@ namespace EscortServices.Rest.DI.Installers
                     .LifestyleTransient(),
                 Component.For<IAdvertisementRepository>()
                     .ImplementedBy<AdvertisementRepository>()
+                    .LifestyleTransient(),
+                Component.For<IParameterRepository>()
+                    .ImplementedBy<ParameterRepository>()
                     .LifestyleTransient()
                 );
         }

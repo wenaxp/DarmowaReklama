@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EscortServices.DataAccess.DTOs;
 using EscortServices.DataAccess.Model;
 using EscortServices.Rest.Models;
 using System;
@@ -12,9 +13,8 @@ namespace EscortServices.Rest.Mapper
     {
         protected override void Configure()
         {
+            CreateMap<AdvertisementPaggingDto, AdvertisementPagingViewModel>();
             CreateMap<Advertisement, AdvertisementViewModel>();
-            CreateMap<IEnumerable<Advertisement>, AdvertisementPagingViewModel>()
-                .ForMember(x=>x.List,y=>y.MapFrom(z=>z));
         }
     }
 }

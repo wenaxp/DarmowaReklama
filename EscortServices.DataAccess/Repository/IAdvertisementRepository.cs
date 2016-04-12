@@ -12,6 +12,6 @@ namespace EscortServices.DataAccess.Repository
     {
         Advertisement Get(string publicId);
         void Save(Advertisement advertisement);
-        List<Advertisement> GetList(out int totalPages, AdvertisementPaggingDto parameters);
+        AdvertisementPaggingDto GetAdvertisementPagging(AdvertisementPaggingDto advPagging);
     }
 }
