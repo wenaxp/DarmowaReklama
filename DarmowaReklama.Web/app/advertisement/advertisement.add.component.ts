@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import { AdvertisementService } from '../advertisement.service';
+import { AdvertisementService } from '../services/advertisement.service';
 
 @Component({
     selector:'advertisement-add',

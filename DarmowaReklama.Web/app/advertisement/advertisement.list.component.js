@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../advertisement.service'], function(exports_1, context_1) {
+System.register(['angular2/core', '../services/advertisement.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -24,8 +24,17 @@ System.register(['angular2/core', '../advertisement.service'], function(exports_
             AdvertisementsComponent = (function () {
                 function AdvertisementsComponent(_advertisementService) {
                     this._advertisementService = _advertisementService;
-                    this.advertisements = this._advertisementService.list();
                 }
+                AdvertisementsComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this._advertisementService.getAdvertisementPaging()
+                        .subscribe(function (advertisementPaging) {
+                        _this.advertisementPaging = advertisementPaging;
+                        console.log(advertisementPaging);
+                    }, function (error) {
+                        console.error('TO:' + error);
+                    });
+                };
                 AdvertisementsComponent = __decorate([
                     core_1.Component({
                         selector: 'advertisements',

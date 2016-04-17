@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Compile Include="Filters\AddCustomHeaderFilter.cs" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,12 +1,26 @@
-import {Component} from 'angular2/core';
-import { AdvertisementService } from '../advertisement.service';
+import {Component, OnInit} from 'angular2/core';
+import { AdvertisementService } from '../services/advertisement.service';
+import { IAdvertisementPaging } from '../models/iadvertisementPagging.model';
 
 @Component({
-    selector:'advertisements',
-    templateUrl:'/app/advertisement/advertisement.list.component.html',
+    selector: 'advertisements',
+    templateUrl: '/app/advertisement/advertisement.list.component.html',
     providers: [AdvertisementService]
 })
-export class AdvertisementsComponent {
+export class AdvertisementsComponent implements OnInit {
+    advertisementPaging: IAdvertisementPaging;
     constructor(private _advertisementService: AdvertisementService) { }
-    advertisements = this._advertisementService.list();
+
+    ngOnInit() {
+        this._advertisementService.getAdvertisementPaging()
+            .subscribe(
+            advertisementPaging => {
+                this.advertisementPaging = advertisementPaging;
+                console.log(advertisementPaging);
+            },
+            error => {
+                console.error('TO:'+error);
+            });
+    }
+
 }

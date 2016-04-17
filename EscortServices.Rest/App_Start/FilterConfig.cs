@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EscortServices.Rest.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,7 @@ namespace EscortServices.Rest
     {
         public static void RegisterGlobalFilters(HttpConfiguration config)
         {
-            //config.Filters.Add(new HandleErrorAttribute());
+            config.Filters.Add(new AddCustomHeaderFilter());
         }
     }
 }
