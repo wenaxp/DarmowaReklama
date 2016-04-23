@@ -15,18 +15,20 @@ namespace EscortServices.DataAccess.Model
     public partial class Advertisement
     {
         public int Id { get; set; }
+        public byte CategoryId { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
         public short CityId { get; set; }
         public string CityName { get; set; }
         public short VoivodeshipId { get; set; }
-        public byte VoivodeshipName { get; set; }
+        public string VoivodeshipName { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
         public string Telephone { get; set; }
         public byte Age { get; set; }
         public byte Weight { get; set; }
-        public string BustSize { get; set; }
+        public byte Height { get; set; }
+        public string BreastSize { get; set; }
         public bool IsEnglish { get; set; }
         public bool IsGerman { get; set; }
         public bool IsRussian { get; set; }
@@ -55,5 +57,7 @@ namespace EscortServices.DataAccess.Model
         public string ContentRU { get; set; }
         public string PublicId { get; set; }
         public System.DateTime Date { get; set; }
+    
+        public virtual Category Category { get; set; }
     }
 }

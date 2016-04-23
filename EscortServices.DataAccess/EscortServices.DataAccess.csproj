@@ -55,6 +55,9 @@
     <Compile Include="Model\Advertisement.cs">
       <DependentUpon>EscortServicesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Category.cs">
+      <DependentUpon>EscortServicesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\EscortServicesModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

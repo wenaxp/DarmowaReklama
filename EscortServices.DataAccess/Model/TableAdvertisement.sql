@@ -42,8 +42,7 @@ CREATE TABLE [dbo].[Advertisement] (
     [Date]            DATETIME2 (0)  NOT NULL
 );
 
-
-insert into Advertisement
-(Password,Name,CityId,CityName,VoivodeshipId,VoivodeshipName,Address,Email,Telephone,Age,Weight,BustSize,English,German,Russian,Price1h,Price30min,Price15min,PriceAllNight,OutCallsId,MonFrom,MonTo,TueFrom,TueTo,WedFrom,WedTo,ThuFrom,ThuTo,FriFrom,FroTo,SatFrom,SatTo,SunFrom,SunTo,ContentPL,ContentEN,ContentDE,ContentRU,PublicId)
-values
-('df','fd','1','kjl','3','23','3','3','3','3','3','3','True','True','True','1','1','1','1','1','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:01','1','1','1','1','1')
+INSERT INTO [dbo].[Advertisement]
+([Height],[Password] ,[Name] ,[CityId] ,[CityName] ,[VoivodeshipId] ,[VoivodeshipName] ,[Address] ,[Email] ,[Telephone] ,[Age] ,[Weight] ,[BreastSize] ,[IsEnglish] ,[IsGerman] ,[IsRussian] ,[Price1h] ,[Price30min] ,[Price15min] ,[PriceAllNight] ,[OutCallsId] ,[MonFrom] ,[MonTo] ,[TueFrom] ,[TueTo] ,[WedFrom] ,[WedTo] ,[ThuFrom] ,[ThuTo] ,[FriFrom] ,[FroTo] ,[SatFrom] ,[SatTo] ,[SunFrom] ,[SunTo] ,[ContentPL] ,[ContentEN] ,[ContentDE] ,[ContentRU] ,[PublicId] ,[CategoryId])
+VALUES
+(34,'pass','name',3,'cityname',4,'VoivodeshipName','adres','email','Telephone',21,56,'aa',0,0,0,100,30,15,1000,2,'00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:01','ContentPL','ContentEN','ContentDE','ContentRU','PublicId',1)

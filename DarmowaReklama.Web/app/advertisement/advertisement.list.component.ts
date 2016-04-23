@@ -13,13 +13,8 @@ export class AdvertisementsComponent implements OnInit {
 
     ngOnInit() {
         this._advertisementService.getAdvertisementPaging()
-            .subscribe(
-            advertisementPaging => {
+            .subscribe(advertisementPaging => {
                 this.advertisementPaging = advertisementPaging;
-                console.log(advertisementPaging);
-            },
-            error => {
-                console.error('TO:'+error);
             });
     }
 

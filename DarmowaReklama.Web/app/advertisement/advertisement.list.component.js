@@ -30,9 +30,6 @@ System.register(['angular2/core', '../services/advertisement.service'], function
                     this._advertisementService.getAdvertisementPaging()
                         .subscribe(function (advertisementPaging) {
                         _this.advertisementPaging = advertisementPaging;
-                        console.log(advertisementPaging);
-                    }, function (error) {
-                        console.error('TO:' + error);
                     });
                 };
                 AdvertisementsComponent = __decorate([

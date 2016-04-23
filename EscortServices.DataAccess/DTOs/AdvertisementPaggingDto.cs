@@ -10,20 +10,21 @@ namespace EscortServices.DataAccess.DTOs
     public class AdvertisementPaggingDto
     {
         public int? TotalPages { get; set; }
-
         public int? PageNo { get; set; }
         public int? PageSize { get; set; }
         public string SortColumn { get; set; }
         public bool? IsAsc { get; set; }
-
+        public int? CategoryId { get; set; }
         public int? CityId { get; set; }
         public int? VoivodeshipId { get; set; }
         public int? AgeFrom { get; set; }
         public int? AgeTo { get; set; }
         public int? WeightFrom { get; set; }
         public int? WeightTo { get; set; }
-        public int? BustSizeFrom { get; set; }
-        public int? BustSizeTo { get; set; }
+        public int? HeightFrom { get; set; }
+        public int? HeightTo { get; set; }
+        public int? BreastSizeFrom { get; set; }
+        public int? BreastSizeTo { get; set; }
         public bool? IsEnglish { get; set; }
         public bool? IsGerman { get; set; }
         public bool? IsRussian { get; set; }

@@ -1,5 +1,25 @@
-<ul>
-  <li *ngFor="#advertisement of advertisements">
-    {{advertisement.id}}
-  </li>
-</ul>
+<div class="col-lg-12">
+  <div class="row">
+    <div *ngFor="#advertisement of advertisementPaging?.list" class="col-xs-12 col-sm-6 col-md-4" style="border:1px solid black;">
+      <div class="row">
+        <div class="col-xs-6">
+          <img src="/img/1.jpg" alt=" {{advertisement.publicId}} " class="img-responsive">
+        </div>
+        <div class="col-xs-6">
+         <p> {{advertisement.name}} </p>
+  <p><span class="glyphicon glyphicon-home" aria-hidden="true"></span>{{advertisement.cityName}} \ {{advertisement.voivodeshipName}}</p>
+  <p><span class="glyphicon glyphicon-usd" aria-hidden="false"></span>{{advertisement.price1h}}</p>
+  <p><span class="glyphicon glyphicon-resize-vertical"></span>{{advertisement.height}}</p>
+  <p><span class="glyphicon glyphicon-home"></span>{{advertisement.weight}}</p>
+  <p><span class="glyphicon glyphicon-home"></span>{{advertisement.age}}  </p>
+  <p><span class="glyphicon glyphicon-home"></span> {{advertisement.telephone}} </p>
+
+
+
+          
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
